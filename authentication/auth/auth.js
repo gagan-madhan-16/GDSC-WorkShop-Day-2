@@ -1,8 +1,10 @@
 const { Router } = require("express");
+const express = require("express");
 const jwt = require("jsonwebtoken");
 const zod = require("zod");
 const bcrypt = require('bcryptjs');
 const cors = require('cors');
+require("dotenv").config();
 
 const app = Router();
 const { User } = require("../db");
@@ -11,6 +13,12 @@ const JWT_SECRET = process.env.JWT_SECRET;
 
 app.use(cors());
 app.use(express.json());
+
+app.get("/", (req,res) => {
+    res.status(200).json({
+        msg: "Welcome to the Workshop API"
+    });
+});
 
 app.post("/signup", async (req,res) => {
     try {
